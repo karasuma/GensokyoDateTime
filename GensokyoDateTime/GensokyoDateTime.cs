@@ -27,6 +27,11 @@ namespace Crowolf
 		private readonly string[] _gogyo = new[]{ "土", "火", "水", "木", "金" };
 
 		/// <summary>
+		/// 旧暦月
+		/// </summary>
+		private readonly string[] _kyurekizuki = new[]{ "睦月", "如月", "弥生", "卯月", "皐月", "水無月", "文月", "葉月", "長月", "神無月", "霜月", "師走" };
+
+		/// <summary>
 		/// このインスタンスのDateTimeを取得します。
 		/// </summary>
 		public DateTime DateTime { get { return _dateTime; } }
@@ -51,6 +56,13 @@ namespace Crowolf
 		}
 
 		/// <summary>
+		/// ここが出雲であるかを取得および設定します。
+		/// この設定は、旧暦月名に関係します。
+		/// </summary>
+		public bool IsIzumo { get { return _isIzumo; } set { _isIzumo = value; } }
+		private bool _isIzumo = false;
+
+		/// <summary>
 		/// このインスタンスの三精を取得します。
 		/// </summary>
 		public string Sansei { get { return _sansei[Ki % 3]; } }
@@ -64,6 +76,21 @@ namespace Crowolf
 		/// このインスタンスの五行を取得します。
 		/// </summary>
 		public string Gogyo { get { return _gogyo[Ki % 5]; } }
+
+		/// <summary>
+		/// このインスタンスの旧暦月名を取得します。
+		/// </summary>
+		public string Kyurekizuki
+		{
+			get
+			{
+				if( IsIzumo && DateTime.Month == 10 )
+				{
+					return "神在月";
+				}
+				return _kyurekizuki[DateTime.Month - 1];
+			}
+		}
 
 		public GensokyoDateTime(DateTime datetime)
 		{
