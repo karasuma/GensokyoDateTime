@@ -32,9 +32,9 @@ namespace Crowolf
 		private readonly string[] _kyurekizuki = new[]{ "睦月", "如月", "弥生", "卯月", "皐月", "水無月", "文月", "葉月", "長月", "神無月", "霜月", "師走" };
 
 		/// <summary>
-		/// このインスタンスのDateTimeを取得します。
+		/// このインスタンスのDateTimeを取得および設定します。
 		/// </summary>
-		public DateTime DateTime { get { return _dateTime; } }
+		public DateTime DateTime { get { return _dateTime; } set { _dateTime = value; } }
 		private DateTime _dateTime;
 
 		/// <summary>
