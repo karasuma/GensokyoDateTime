@@ -32,13 +32,23 @@ namespace Crowolf
 		private readonly string[] _kyurekizuki = new[]{ "睦月", "如月", "弥生", "卯月", "皐月", "水無月", "文月", "葉月", "長月", "神無月", "霜月", "師走" };
 
 		/// <summary>
-		/// このインスタンスのDateTimeを取得および設定します。
+		/// 十二支
+		/// </summary>
+		private readonly string[] _junishi = new[]{ "子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥" };
+
+		/// <summary>
+		/// ?つ刻
+		/// </summary>
+		private readonly string[] _koku = new[]{ "一つ刻", "二つ刻", "三つ刻", "四つ刻" };
+
+		/// <summary>
+		/// DateTimeを取得および設定します。
 		/// </summary>
 		public DateTime DateTime { get { return _dateTime; } set { _dateTime = value; } }
 		private DateTime _dateTime;
 
 		/// <summary>
-		/// このインスタンスの季を取得します。
+		/// 季を取得します。
 		/// 仮に現在が2005年の場合、120が返されます。
 		/// 季が0以下の場合、例外をスローします。
 		/// </summary>
@@ -63,22 +73,22 @@ namespace Crowolf
 		private bool _isIzumo = false;
 
 		/// <summary>
-		/// このインスタンスの三精を取得します。
+		/// 三精を取得します。
 		/// </summary>
 		public string Sansei { get { return _sansei[Ki % 3]; } }
 
 		/// <summary>
-		/// このインスタンスの四季を取得します。
+		/// 四季を取得します。
 		/// </summary>
 		public string Siki { get { return _siki[Ki % 4]; } }
 
 		/// <summary>
-		/// このインスタンスの五行を取得します。
+		/// 五行を取得します。
 		/// </summary>
 		public string Gogyo { get { return _gogyo[Ki % 5]; } }
 
 		/// <summary>
-		/// このインスタンスの旧暦月名を取得します。
+		/// 旧暦月名を取得します。
 		/// </summary>
 		public string Kyurekizuki
 		{
@@ -92,6 +102,16 @@ namespace Crowolf
 			}
 		}
 
+		/// <summary>
+		/// 十二支を取得します。
+		/// </summary>
+		public string Junishi { get { return _junishi[GetQuarterTimeIndex() / 4]; } }
+
+		/// <summary>
+		/// DateTimeが今何刻かを取得します。
+		/// </summary>
+		public string Koku { get { return _koku[GetQuarterTimeIndex() % 4]; } }
+
 		public GensokyoDateTime(DateTime datetime)
 		{
 			_dateTime = datetime;
@@ -101,5 +121,23 @@ namespace Crowolf
 			: this( new DateTime( year, month, day ) ) { }
 		public GensokyoDateTime(int year, int month, int day, int hour, int minute, int second)
 			: this( new DateTime( year, month, day, hour, minute, second ) ) { }
+
+		/// <summary>
+		/// 十二時辰のインデックスを30分毎に取得（23:00（子）～）
+		/// </summary>
+		/// <returns></returns>
+		private int GetQuarterTimeIndex()
+		{
+			var minuteAdjustment = DateTime.Minute < 30 ? 0 : 1;
+			var hour = DateTime.Hour;
+
+			var index = 0;
+			if( hour == 23 )
+				index = 0 + minuteAdjustment;
+			else
+				index = (hour + 1) * 2 + minuteAdjustment;
+
+			return index;
+		}
 	}
 }
