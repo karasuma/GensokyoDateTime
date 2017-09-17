@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Crowolf
 {
 	/// <summary>
-	/// 幻想郷の暦、時刻として表現される瞬間を表します。
+	/// 幻想郷の暦、時刻（十二時辰）として表現される瞬間を表します。
 	/// </summary>
 	public class GensokyoDateTime
 	{
@@ -39,7 +39,12 @@ namespace Crowolf
 		/// <summary>
 		/// ?つ刻
 		/// </summary>
-		private readonly string[] _koku = new[]{ "一つ刻", "二つ刻", "三つ刻", "四つ刻" };
+		private readonly string[] _koku = new[]{ "一つ", "二つ", "三つ", "四つ" };
+
+		/// <summary>
+		/// 正刻の鐘
+		/// </summary>
+		private readonly string[] _seikoku = new[]{ "夜九つ", "夜八つ", "暁七つ", "明六つ", "朝五つ", "昼四つ", "昼九つ", "昼八つ", "夕七つ", "暮六つ", "宵五つ", "夜四つ" };
 
 		/// <summary>
 		/// DateTimeを取得および設定します。
@@ -112,6 +117,11 @@ namespace Crowolf
 		/// </summary>
 		public string Koku { get { return _koku[GetQuarterTimeIndex() % 4]; } }
 
+		/// <summary>
+		/// 正刻の鐘を取得します。
+		/// </summary>
+		public string Seikoku { get { return _seikoku[GetQuarterTimeIndex() / 4]; } }
+
 		public GensokyoDateTime(DateTime datetime)
 		{
 			_dateTime = datetime;
@@ -119,8 +129,8 @@ namespace Crowolf
 
 		public GensokyoDateTime(int year, int month, int day)
 			: this( new DateTime( year, month, day ) ) { }
-		public GensokyoDateTime(int year, int month, int day, int hour, int minute, int second)
-			: this( new DateTime( year, month, day, hour, minute, second ) ) { }
+		public GensokyoDateTime(int year, int month, int day, int hour, int minute)
+			: this( new DateTime( year, month, day, hour, minute, 0 ) ) { }
 
 		/// <summary>
 		/// 十二時辰のインデックスを30分毎に取得（23:00（子）～）
