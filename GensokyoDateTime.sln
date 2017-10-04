@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GensokyoDateTime", "GensokyoDateTime\GensokyoDateTime.csproj", "{5B00DE14-4833-4B38-B8F5-75499C0B1B24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GensokyoDateTime.CSharp", "GensokyoDateTime.CSharp\GensokyoDateTime.CSharp.csproj", "{5B00DE14-4833-4B38-B8F5-75499C0B1B24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +18,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6675EC8-4D18-4CB4-935D-E9342300D73B}
 	EndGlobalSection
 EndGlobal
