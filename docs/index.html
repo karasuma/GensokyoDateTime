@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html />
+<html lang="ja">
+	<head>
+		<title>幻想郷暦</title>
+	</head>
+
+	<body>
+		<h1>西暦→幻想郷暦　変換</h1>
+		<form name="conversion">
+			<input type="text" name="ad" value="2017/10/05 21:00" /><br />
+			<input type="button" value="変換↓" onclick="Execute()" /><br />
+			<textarea name="gensokyo" rows="4" cols="40"></textarea>
+		</form>
+
+		<script type="text/javascript" src="./GensokyoDateTime.js"></script>
+		<script type="text/javascript">
+			// 実行
+			var Execute = function ()
+			{
+				// 入力された時間を分割
+				var addatetime = document.conversion.ad.value.split(' ');
+				var addate = addatetime[0].split('/');
+				var adtime = addatetime[1].split(':');
+
+				// 入力された時間を取得
+				var date = new Date(Number(addate[0]), Number(addate[1]) - 1, Number(addate[2]), Number(adtime[0]), Number(adtime[1]));
+				var gensokyo = new GensokyoDateTime(date);
+
+				// 幻想郷暦の取得
+				var ki = "第" + gensokyo.getKi() + "季";
+				var toshi = gensokyo.getSansei() + "と" + gensokyo.getSiki() + "と" + gensokyo.getGogyo() + "の年";
+				var year = ki + "　" + toshi + "\n";
+
+				var olddate = gensokyo.getKyurekizuki() + "ノ" + date.getDate() + "\n";
+
+				var time_new = date.getHours() + ":" + date.getMinutes();
+				var time_old = gensokyo.getJunishi() + "字、" + gensokyo.getKoku() + "刻、" + gensokyo.getSeikoku();
+				var time = time_new + "（" + time_old + "）\n";
+
+				// 反映
+				document.conversion.gensokyo.value = year + olddate + time;
+			}
+		</script>
+	</body>
+</html>
