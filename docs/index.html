@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html />
+<html lang="ja">
+	<head>
+		<title>幻想郷暦</title>
+	</head>
+
+	<body>
+		<h1>西暦→幻想郷暦　変換</h1>
+		<form name="convertion">
+			<input type="text" name="ad" value="2017/10/5 21:00" /><br />
+			<input type="button" value="変換" onclick="Execute()" /><br />
+			<textarea name="gensokyo" rows="3" cols="40"></textarea>
+		</form>
+
+		<script type="text/javascript" src="./GensokyoDateTime.js"></script>
+		<script type="text/javascript">
+			// 現在時間を取得
+			var date = new Date();
+			var gensokyo = new GensokyoDateTime(date);
+
+			// 実行
+			var Execute = function ()
+			{
+				var ki = "第" + gensokyo.getKi() + "季";
+				var toshi = gensokyo.getSansei() + "と" + gensokyo.getSiki() + "と" + gensokyo.getGogyo() + "の年";
+				var year = ki + "　" + toshi + "\n";
+
+				var olddate = gensokyo.getKyurekizuki() + "ノ" + date.getDate() + "\n";
+
+				var time_new = date.getHours() + ":" + date.getMinutes();
+				var time_old = gensokyo.getJunishi() + "字、" + gensokyo.getKoku() + "刻、" + gensokyo.getSeikoku();
+				var time = time_new + "（" + time_old + "）\n";
+
+				document.convertion.gensokyo.value = year + olddate + time;
+			}
+		</script>
+	</body>
+</html>
