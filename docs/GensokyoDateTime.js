@@ -92,7 +92,7 @@
 	// 十二支を取得
 	prototype.getJunishi = function ()
 	{
-		return _junishi[this._getQuarterTimeIndex() / 4];
+		return _junishi[~~(this._getQuarterTimeIndex() / 4)];
 	}
 
 	// 今何刻かを取得
@@ -104,7 +104,7 @@
 	// 正刻の鐘
 	prototype.getSeikoku = function ()
 	{
-		return _seikoku[this._getQuarterTimeIndex() / 4];
+		return _seikoku[~~(this._getQuarterTimeIndex() / 4)];
 	}
 
 	return GensokyoDateTime;
